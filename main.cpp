@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
         label.setMargin(10); // Add some margin for aesthetic spacing
         label.show();
 
-        return app.exec(); // Run the application event loop
+        return QApplication::exec(); // Run the application event loop
 
     } catch (exception &e) {
         qDebug() << "Error:" << e.what();
