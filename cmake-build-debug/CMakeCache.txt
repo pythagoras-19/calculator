@@ -219,6 +219,9 @@ Qt5Gui_DIR:PATH=/Users/mattc/opt/anaconda3/lib/cmake/Qt5Gui
 //The directory containing a CMake configuration file for Qt5Widgets.
 Qt5Widgets_DIR:PATH=/Users/mattc/opt/anaconda3/lib/cmake/Qt5Widgets
 
+//The directory containing a CMake configuration file for bsoncxx.
+bsoncxx_DIR:PATH=/opt/homebrew/lib/cmake/bsoncxx-3.8.1
+
 //Value Computed by CMake
 calculator_BINARY_DIR:STATIC=/Users/mattc/CLionProjects/calculator/cmake-build-debug
 
@@ -227,6 +230,12 @@ calculator_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 calculator_SOURCE_DIR:STATIC=/Users/mattc/CLionProjects/calculator
+
+//The directory containing a CMake configuration file for mongo-cxx-driver.
+mongo-cxx-driver_DIR:PATH=mongo-cxx-driver_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for mongocxx.
+mongocxx_DIR:PATH=/opt/homebrew/lib/cmake/mongocxx-3.8.1
 
 
 ########################

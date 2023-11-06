@@ -1,6 +1,5 @@
 #include "Calculator.h"
 #include "Animal.h"
-#include <iostream>
 #include <QApplication>
 #include <QDebug>
 #include <QLabel>

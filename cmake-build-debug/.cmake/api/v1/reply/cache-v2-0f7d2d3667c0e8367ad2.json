@@ -1138,6 +1138,18 @@
 			"value" : "/Users/mattc/opt/anaconda3/lib/cmake/Qt5Widgets"
 		},
 		{
+			"name" : "bsoncxx_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for bsoncxx."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/lib/cmake/bsoncxx-3.8.1"
+		},
+		{
 			"name" : "calculator_BINARY_DIR",
 			"properties" : 
 			[
@@ -1172,6 +1184,30 @@
 			],
 			"type" : "STATIC",
 			"value" : "/Users/mattc/CLionProjects/calculator"
+		},
+		{
+			"name" : "mongo-cxx-driver_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for mongo-cxx-driver."
+				}
+			],
+			"type" : "PATH",
+			"value" : "mongo-cxx-driver_DIR-NOTFOUND"
+		},
+		{
+			"name" : "mongocxx_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for mongocxx."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/lib/cmake/mongocxx-3.8.1"
 		}
 	],
 	"kind" : "cache",
