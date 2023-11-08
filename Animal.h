@@ -26,9 +26,9 @@ public:
     void setType(std::string type);
 
     //getter functions
-    double getWeight();
-    double getHeight();
-    double getBeastLevel();
+    double getWeight() const;
+    double getHeight() const;
+    double getBeastLevel() const;
     std::string getWhatItEats();
     std::string getName();
     std::string getSound();
@@ -62,8 +62,8 @@ private:
     std::string sound{}; // this is the sound the animal makes
     std::string color{}; // this is the color of the animal
     std::string type{}; // this is the type of animal
-    int energy; // this is the energy level of the animal
-    [[maybe_unused]] int animalID;
+    int energy{}; // this is the energy level of the animal
+    [[maybe_unused]] int animalID{};
 };
 
 

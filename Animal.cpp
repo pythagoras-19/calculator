@@ -5,6 +5,7 @@
 #include "Animal.h"
 #include <string>
 #include <iostream>
+#include <utility>
 
 using namespace std;
 
@@ -14,11 +15,11 @@ using namespace std;
     this->weight = weight;
     this->height = height;
     this->beastLevel = beastLevel;
-    this->whatItEats = whatItEats;
-    this->name = name;
-    this->sound = sound;
-    this->color = color;
-    this->type = type;
+    this->whatItEats = std::move(whatItEats);
+    this->name = std::move(name);
+    this->sound = std::move(sound);
+    this->color = std::move(color);
+    this->type = std::move(type);
 }
 
 void Animal::setWeight(double weight) {
@@ -47,13 +48,13 @@ void Animal::setType(std::string type) {
     this->type = std::move(type);
 }
 //getter functions
-double Animal::getWeight() {
+double Animal::getWeight() const {
     return this->weight;
 }
-double Animal::getHeight() {
+double Animal::getHeight() const {
     return this->height;
 }
-double Animal::getBeastLevel() {
+double Animal::getBeastLevel() const {
     return this->beastLevel;
 }
 std::string Animal::getWhatItEats() {

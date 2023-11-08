@@ -8,7 +8,6 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv); // Move QApplication up so it is initialized first
-
     try {
         auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1", "Roar",
                                 "Brown", "canidae");
@@ -25,7 +24,6 @@ int main(int argc, char* argv[]) {
         bearDetails.append("Sound: " + QString::fromStdString(bear->getSound()) + "<br>");
         bearDetails.append("Color: " + QString::fromStdString(bear->getColor()) + "<br>");
         bearDetails.append("Type: " + QString::fromStdString(bear->getType()) + "<br><br>");
-
 
         calc->add(1, 2);
         calc->add(1.0, 2.0);

@@ -8,14 +8,14 @@
 
 class Calculator {
 public:
-    [[maybe_unused]] int add(int a, int b);
-    [[maybe_unused]] double add(double a, double b);
-    [[maybe_unused]] int subtract(int a, int b);
+    [[maybe_unused]] static int add(int a, int b);
+    [[maybe_unused]] static double add(double a, double b);
+    [[maybe_unused]] static int subtract(int a, int b);
     [[maybe_unused]] static double subtract(double a, double b);
-    [[maybe_unused]] int multiply(int a, int b);
-    [[maybe_unused]] double multiply(double a, double b);
-    [[maybe_unused]] int divide(int a, int b);
-    [[maybe_unused]] double divide(double a, double b);
+    [[maybe_unused]] static int multiply(int a, int b);
+    [[maybe_unused]] static double multiply(double a, double b);
+    [[maybe_unused]] static int divide(int a, int b);
+    [[maybe_unused]] static double divide(double a, double b);
 };
 
 
