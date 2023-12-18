@@ -10,7 +10,7 @@
 using namespace std;
 
 // constructor that sets the attributes by passing in the values
-[[maybe_unused]] Animal::Animal(double weight, double height, double beastLevel, std::string whatItEats, std::string name, std::string sound,
+Animal::Animal(double weight, double height, double beastLevel, std::string whatItEats, std::string name, std::string sound,
                std::string color, std::string type) {
     this->weight = weight;
     this->height = height;

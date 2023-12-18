@@ -40,7 +40,7 @@ public:
            std::string color, std::string type);
 
     //destructor
-    ~Animal();
+    virtual ~Animal();
 
     //other functions
     [[maybe_unused]] void makeSound();

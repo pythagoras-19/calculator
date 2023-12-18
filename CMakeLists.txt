@@ -16,7 +16,10 @@ set(BSONCXX_LIBRARY $ENV{BSONCXX_LIBRARY})
 include_directories(${MONGOCXX_INCLUDE_DIR})
 include_directories(${BSONCXX_INCLUDE_DIR})
 
-add_executable(calculator main.cpp Calculator.cpp Calculator.h Animal.cpp Animal.h)
+add_executable(calculator main.cpp Calculator.cpp Calculator.h Animal.cpp Animal.h
+        Housecat.cpp
+        Housecat.cpp
+        Housecat.h)
 
 # link the Qt5Widgets library and MongoDB driver libraries
 target_link_libraries(calculator Qt5::Widgets ${MONGOCXX_LIBRARY} ${BSONCXX_LIBRARY})
