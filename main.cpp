@@ -1,19 +1,18 @@
-#include "Calculator.h"
 #include "Animal.h"
 #include <QApplication>
 #include <QDebug>
+#include <QPixmap>
+#include <QHBoxLayout>
+#include <QWidget>
 #include <QLabel>
 #include <QString>
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    QApplication app(argc, argv); // Move QApplication up so it is initialized first
+    QApplication app(argc, argv);
     try {
         auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1", "Roar",
                                 "Brown", "canidae");
-        auto *calc = new Calculator();
-
-        // Create a QString to hold the details of the bear.
         QString bearDetails;
         bearDetails.append("<b>Bear details:</b><br>");
         bearDetails.append("Weight: " + QString::number(bear->getWeight()) + "<br>");
@@ -24,23 +23,33 @@ int main(int argc, char* argv[]) {
         bearDetails.append("Sound: " + QString::fromStdString(bear->getSound()) + "<br>");
         bearDetails.append("Color: " + QString::fromStdString(bear->getColor()) + "<br>");
         bearDetails.append("Type: " + QString::fromStdString(bear->getType()) + "<br><br>");
-
-        calc->add(1, 2);
-        calc->add(1.0, 2.0);
-        calc->subtract(1, 2);
-        Calculator::subtract(1.0, 2.0);
-        calc->multiply(1, 2);
-
         bearDetails.append("Successfully created an animal and calculator object.\n");
 
-        // Create the QLabel with the bear details
-        QLabel label(bearDetails);
-        label.setTextFormat(Qt::RichText);
-        label.setWindowTitle("Animal Details");
-        label.setMargin(10); // Add some margin for aesthetic spacing
-        label.show();
+        QLabel *detailsLabel = new QLabel(bearDetails);
+        detailsLabel->setTextFormat(Qt::RichText);
 
-        return QApplication::exec(); // Run the application event loop
+        QPixmap bearImage("/Users/mattc/CLionProjects/calculator/bear_cute.png");
+        if (bearImage.isNull()) {
+            qDebug() << "Failed to load the image!";
+            return -1;
+        }
+        qDebug() << "Loaded img successfully! Size: " << bearImage.size();
+        QLabel* imageLabel = new QLabel;
+        imageLabel->setPixmap(bearImage);
+        imageLabel->setMinimumSize(100, 100);
+
+        QHBoxLayout *layout = new QHBoxLayout;
+        layout->addWidget(detailsLabel);
+        layout->addWidget(imageLabel);
+        layout->setMargin(10);
+
+        QWidget window;
+        window.setLayout(layout);
+        window.setWindowTitle("Animal Details");
+        window.setMinimumSize(400, 300);
+        window.show();
+
+        return QApplication::exec();
 
     } catch (exception &e) {
         qDebug() << "Error:" << e.what();
