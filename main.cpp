@@ -1,3 +1,4 @@
+#include "Calculator.h"
 #include "Animal.h"
 #include <QApplication>
 #include <QDebug>
@@ -6,6 +7,8 @@
 #include <QWidget>
 #include <QLabel>
 #include <QString>
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -47,6 +50,13 @@ int main(int argc, char* argv[]) {
         window.setLayout(layout);
         window.setWindowTitle("Animal Details");
         window.setMinimumSize(400, 300);
+        QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(&window);
+        window.setGraphicsEffect(opacityEffect);
+        QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity");
+        animation->setDuration(5000);
+        animation->setStartValue(0.0); // start fully transparent
+        animation->setEndValue(1.0); // end fully opaque
+        animation->start();
         window.show();
 
         return QApplication::exec();
