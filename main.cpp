@@ -1,7 +1,6 @@
 #include "ClickableLabel.h"
 #include "Animal.h"
 #include <QApplication>
-#include <QDebug>
 #include <QPixmap>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -97,15 +96,6 @@ int main(int argc, char* argv[]) {
         window.setLayout(layout);
         window.setWindowTitle("Animal App v.37.0");
         window.setMinimumSize(800, 300);
-        /*
-        QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(&window);
-        window.setGraphicsEffect(opacityEffect);
-        QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity");
-        animation->setDuration(5000);
-        animation->setStartValue(0.0); // start fully transparent
-        animation->setEndValue(1.0); // end fully opaque
-        animation->start();
-         */
         window.show();
 
         return QApplication::exec();
