@@ -1,4 +1,4 @@
-#include "Calculator.h"
+#include "ClickableLabel.h"
 #include "Animal.h"
 #include <QApplication>
 #include <QDebug>
@@ -44,6 +44,14 @@ int main(int argc, char* argv[]) {
         QLabel* imageLabel = new QLabel;
         imageLabel->setPixmap(bearImage);
         imageLabel->setMinimumSize(100, 100);
+        /*
+        ClickableLabel *imageLabel = new ClickableLabel;
+        imageLabel->setPixmap(bearImage);
+        imageLabel->setMinimumSize(100, 100);
+         */
+        imageLabel->setStyleSheet("border: 1px solid red;");
+        detailsLabel->setStyleSheet("border: 1px solid blue;");
+
 
         QHBoxLayout *layout = new QHBoxLayout;
         layout->addWidget(detailsLabel);
