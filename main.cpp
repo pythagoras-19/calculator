@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QString>
+#include <QFont>
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 using namespace std;
@@ -30,6 +31,9 @@ int main(int argc, char* argv[]) {
 
         QLabel *detailsLabel = new QLabel(bearDetails);
         detailsLabel->setTextFormat(Qt::RichText);
+
+        QFont cuteFont("Comic Sans MS", 14, QFont::Bold);
+        detailsLabel->setFont(cuteFont);
 
         QPixmap bearImage("/Users/mattc/CLionProjects/calculator/bear_cute.png");
         if (bearImage.isNull()) {
