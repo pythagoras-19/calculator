@@ -41,16 +41,21 @@ int main(int argc, char* argv[]) {
             return -1;
         }
         qDebug() << "Loaded img successfully! Size: " << bearImage.size();
+        /*
         QLabel* imageLabel = new QLabel;
         imageLabel->setPixmap(bearImage);
         imageLabel->setMinimumSize(100, 100);
-        /*
+         */
+
         ClickableLabel *imageLabel = new ClickableLabel;
         imageLabel->setPixmap(bearImage);
         imageLabel->setMinimumSize(100, 100);
-         */
         imageLabel->setStyleSheet("border: 1px solid red;");
         detailsLabel->setStyleSheet("border: 1px solid blue;");
+
+        QGraphicsOpacityEffect *bearOpacityEffect = new QGraphicsOpacityEffect(imageLabel);
+        imageLabel->setGraphicsEffect(bearOpacityEffect);
+        bearOpacityEffect->setOpacity(1.0);
 
 
         QHBoxLayout *layout = new QHBoxLayout;
