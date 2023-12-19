@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <Qt>
+#include <QDebug>
 
 class ClickableLabel : public QLabel {
     Q_OBJECT

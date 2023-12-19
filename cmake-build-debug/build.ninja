@@ -163,7 +163,7 @@ build calculator_autogen/timestamp calculator_autogen/mocs_compilation.cpp | ${c
 #############################################
 # Phony custom command for CMakeFiles/calculator_autogen_timestamp_deps
 
-build CMakeFiles/calculator_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/calculator_autogen_timestamp_deps: phony /Users/mattc/opt/anaconda3/lib/libQt5Widgets.5.15.2.dylib /Users/mattc/opt/anaconda3/bin/moc
+build CMakeFiles/calculator_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/calculator_autogen_timestamp_deps: phony /Users/mattc/opt/anaconda3/bin/moc /Users/mattc/opt/anaconda3/lib/libQt5Widgets.5.15.2.dylib
 
 
 #############################################
