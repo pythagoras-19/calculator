@@ -12,8 +12,8 @@ Housecat::~Housecat() {
 
 Housecat::Housecat(double weight, double height, double beastLevel, std::string whatItEats, std::string name,
                    std::string sound, std::string color, std::string type, int houseCatId)
-        : Animal(weight, height, beastLevel, std::move(whatItEats), std::move(name), std::move(sound), std::move(color), std::move(type)),
-          houseCatId(houseCatId)
+        : Animal(weight, height, beastLevel, std::move(whatItEats), std::move(name), std::move(sound), std::move(color),
+                 std::move(type)),houseCatId(houseCatId)
 {
 }
 

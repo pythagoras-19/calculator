@@ -36,8 +36,8 @@ public:
     std::string getType();
 
     //constructor
-    [[maybe_unused]] Animal(double weight, double height, double beastLevel, std::string whatItEats, std::string name, std::string sound,
-           std::string color, std::string type);
+    [[maybe_unused]] Animal(double weight, double height, double beastLevel, std::string whatItEats, std::string name,
+                            std::string sound, std::string color, std::string type);
 
     //destructor
     virtual ~Animal();

@@ -15,8 +15,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     try {
-        auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1", "Roar",
-                                "Brown", "canidae");
+        auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1",
+                                "Roar","Brown", "canidae");
         QString bearDetails;
         bearDetails.append("<b>Bear details:</b><br>");
         bearDetails.append("Weight: " + QString::number(bear->getWeight()) + "<br>");
