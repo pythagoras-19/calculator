@@ -35,3 +35,11 @@
 5	36	1702948819086431307	/Users/mattc/CLionProjects/calculator/cmake-build-debug/calculator_autogen/mocs_compilation.cpp	8a282b3beb49e06e
 39	629	1702948819676354459	CMakeFiles/calculator.dir/main.cpp.o	dc0bc58c5907a900
 629	672	1702948819722103219	calculator	9c11b1733901523c
+16	48	1702950239707623206	calculator_autogen/timestamp	8a282b3beb49e06e
+16	48	1702950239707623206	calculator_autogen/mocs_compilation.cpp	8a282b3beb49e06e
+16	48	1702950239707623206	/Users/mattc/CLionProjects/calculator/cmake-build-debug/calculator_autogen/timestamp	8a282b3beb49e06e
+16	48	1702950239707623206	/Users/mattc/CLionProjects/calculator/cmake-build-debug/calculator_autogen/mocs_compilation.cpp	8a282b3beb49e06e
+52	401	1702950240058729061	CMakeFiles/calculator.dir/Housecat.cpp.o	c4402ae79059eb2b
+52	406	1702950240062637157	CMakeFiles/calculator.dir/Animal.cpp.o	66fc12403b2c744a
+52	633	1702950240289544690	CMakeFiles/calculator.dir/main.cpp.o	dc0bc58c5907a900
+633	676	1702950240335129422	calculator	9c11b1733901523c

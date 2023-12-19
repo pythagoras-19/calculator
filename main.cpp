@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 
         QWidget window;
         window.setLayout(layout);
-        window.setWindowTitle("Animal Details");
+        window.setWindowTitle("Animal App v.37.0");
         window.setMinimumSize(400, 300);
         QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(&window);
         window.setGraphicsEffect(opacityEffect);
