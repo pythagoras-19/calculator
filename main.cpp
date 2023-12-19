@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
             qDebug() << "Failed to load the image!";
             return -1;
         }
-        qDebug() << "Loaded img successfully! Size: " << bearImage.size();
+        qDebug() << "Loaded image successfully! Size: " << bearImage.size();
 
         ClickableLabel *imageLabel = new ClickableLabel;
         imageLabel->setPixmap(bearImage);
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
         imageLabel->setGraphicsEffect(bearOpacityEffect);
         bearOpacityEffect->setOpacity(1.0); // start fully visible
 
-        // create fade out animation on click of bear image
+        // fade out animation on click of bear image
         QObject::connect(imageLabel, &ClickableLabel::clicked, [&](){
             QPropertyAnimation *fadeOutAnimation =
                     new QPropertyAnimation(bearOpacityEffect, "opacity");
@@ -72,13 +72,12 @@ int main(int argc, char* argv[]) {
             // fade in meadow image
             QObject::connect(fadeOutAnimation, &QPropertyAnimation::finished, [&](){
                 imageLabel->hide();
-
                 meadowLabel->show();
                 QPropertyAnimation *fadeInAnimation =
                         new QPropertyAnimation(meadowOpacityEffect, "opacity");
                 fadeInAnimation->setDuration(1000);
-                fadeInAnimation->setStartValue(0.0);
-                fadeInAnimation->setEndValue(1.0);
+                fadeInAnimation->setStartValue(0.0); // start invisible
+                fadeInAnimation->setEndValue(1.0); // fade to fully visible
                 fadeInAnimation->start(QAbstractAnimation::DeleteWhenStopped);
             });
             fadeOutAnimation->start(QAbstractAnimation::DeleteWhenStopped);
