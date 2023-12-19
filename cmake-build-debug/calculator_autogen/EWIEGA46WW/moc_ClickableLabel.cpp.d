@@ -628,6 +628,7 @@
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/time.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/QDebug \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/Qt \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qalgorithms.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qarraydata.h \
@@ -640,7 +641,9 @@
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qconfig.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qcontainerfwd.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qcontainertools_impl.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qcontiguouscache.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qdatastream.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qdebug.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qflags.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qglobal.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qglobalstatic.h \
@@ -650,7 +653,9 @@
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qiterator.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qline.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qlist.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qlocale.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qlogging.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qmap.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qmargins.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qmetatype.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qmutex.h \
@@ -667,6 +672,7 @@
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qrefcount.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qregexp.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qscopedpointer.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qset.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qshareddata.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qsharedpointer.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qsharedpointer_impl.h \
@@ -680,7 +686,9 @@
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qsysinfo.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qsystemdetection.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qtcore-config.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qtextstream.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qtypeinfo.h \
+  /Users/mattc/opt/anaconda3/include/qt/QtCore/qvariant.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qvarlengtharray.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qvector.h \
   /Users/mattc/opt/anaconda3/include/qt/QtCore/qversiontagging.h \

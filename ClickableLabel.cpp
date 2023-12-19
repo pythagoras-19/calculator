@@ -26,15 +26,13 @@ void ClickableLabel::mousePressEvent(QMouseEvent* event) {
     emit clicked();
 }
 
+/* TODO: GET RID OF THIS */
 void ClickableLabel::paintEvent(QPaintEvent* event) {
+    qDebug("paintEvent called.");
     QPainter painter(this);
-    // Translate the coordinate system's origin to the center of the label
     painter.translate(width() / 2, height() / 2);
-    // Rotate around the new origin (center of the label)
     painter.rotate(m_rotation);
-    // Translate back so that the drawing happens at the correct position
     painter.translate(-width() / 2, -height() / 2);
-    // Call the base class paintEvent to draw the label as usual
     QLabel::paintEvent(event);
 }
 
