@@ -29,15 +29,15 @@ int main(int argc, char* argv[]) {
         bearDetails.append("Successfully created an animal and calculator object.\n");
 
         // set up images
-        QLabel *detailsLabel = new QLabel(bearDetails);
+        auto *detailsLabel = new QLabel(bearDetails);
         detailsLabel->setTextFormat(Qt::RichText);
 
-        QLabel *meadowLabel = new QLabel;
+        auto *meadowLabel = new QLabel;
         meadowLabel->setPixmap(QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
         meadowLabel->setMinimumSize(100, 100);
         meadowLabel->hide();
 
-        QGraphicsOpacityEffect *meadowOpacityEffect = new QGraphicsOpacityEffect(meadowLabel);
+        auto *meadowOpacityEffect = new QGraphicsOpacityEffect(meadowLabel);
         meadowLabel->setGraphicsEffect(meadowOpacityEffect);
         meadowOpacityEffect->setOpacity(0.0); // start fully transparent
 
@@ -51,19 +51,19 @@ int main(int argc, char* argv[]) {
         }
         qDebug() << "Loaded image successfully! Size: " << bearImage.size();
 
-        ClickableLabel *imageLabel = new ClickableLabel;
+        auto *imageLabel = new ClickableLabel;
         imageLabel->setPixmap(bearImage);
         imageLabel->setMinimumSize(100, 100);
         imageLabel->setStyleSheet("border: 1px solid red;");
         detailsLabel->setStyleSheet("border: 1px solid blue;");
 
-        QGraphicsOpacityEffect *bearOpacityEffect = new QGraphicsOpacityEffect(imageLabel);
+        auto *bearOpacityEffect = new QGraphicsOpacityEffect(imageLabel);
         imageLabel->setGraphicsEffect(bearOpacityEffect);
         bearOpacityEffect->setOpacity(1.0); // start fully visible
 
         // fade out animation on click of bear image
         QObject::connect(imageLabel, &ClickableLabel::clicked, [&](){
-            QPropertyAnimation *fadeOutAnimation =
+            auto *fadeOutAnimation =
                     new QPropertyAnimation(bearOpacityEffect, "opacity");
             fadeOutAnimation->setDuration(1000); // 1 second for fade-out
             fadeOutAnimation->setStartValue(1.0); // Start fully visible
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
             QObject::connect(fadeOutAnimation, &QPropertyAnimation::finished, [&](){
                 imageLabel->hide();
                 meadowLabel->show();
-                QPropertyAnimation *fadeInAnimation =
+                auto *fadeInAnimation =
                         new QPropertyAnimation(meadowOpacityEffect, "opacity");
                 fadeInAnimation->setDuration(1000);
                 fadeInAnimation->setStartValue(0.0); // start invisible
@@ -83,9 +83,7 @@ int main(int argc, char* argv[]) {
             fadeOutAnimation->start(QAbstractAnimation::DeleteWhenStopped);
         });
 
-        // create fade in animation on click of meadow image
-
-        QHBoxLayout *layout = new QHBoxLayout;
+        auto *layout = new QHBoxLayout;
         layout->addWidget(detailsLabel);
         layout->addWidget(imageLabel);
         layout->setMargin(10);
