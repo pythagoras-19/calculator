@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 
 # Find packages
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Widgets Multimedia REQUIRED)
 
 # Read paths from environment variables
 set(MONGOCXX_INCLUDE_DIR $ENV{MONGOCXX_INCLUDE_DIR})
@@ -29,7 +29,9 @@ add_executable(
         Housecat.h
         ClickableLabel.cpp
         ClickableLabel.h
+        GameBoard.cpp
+        GameBoard.h
 )
 
-# link the Qt5Widgets library and MongoDB driver libraries
-target_link_libraries(calculator Qt5::Widgets ${MONGOCXX_LIBRARY} ${BSONCXX_LIBRARY})
+# link the Qt6 libraries and MongoDB driver libraries
+target_link_libraries(calculator Qt6::Widgets Qt6::Multimedia ${MONGOCXX_LIBRARY} ${BSONCXX_LIBRARY})

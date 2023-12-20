@@ -1,4 +1,4 @@
 /private/var/folders/9h/b9nyryx16q38pz4qrd3mk5hh0000gn/T/AppTranslocation/B03C94AF-6CE3-4B3C-B0B6-759B2B7F15AA/d/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/private/var/folders/9h/b9nyryx16q38pz4qrd3mk5hh0000gn/T/AppTranslocation/B03C94AF-6CE3-4B3C-B0B6-759B2B7F15AA/d/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/mattc/CLionProjects/calculator -B /Users/mattc/CLionProjects/calculator/cmake-build-debug
--- Configuring done (0.5s)
+-- Configuring done (0.4s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/mattc/CLionProjects/calculator/cmake-build-debug

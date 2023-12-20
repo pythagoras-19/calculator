@@ -1,5 +1,6 @@
 #include "ClickableLabel.h"
 #include "Animal.h"
+#include "GameBoard.h"
 #include <QApplication>
 #include <QPixmap>
 #include <QHBoxLayout>
@@ -9,6 +10,7 @@
 #include <QFont>
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
+#include <QGraphicsView>
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -44,9 +46,10 @@ int main(int argc, char* argv[]) {
         QFont cuteFont("Comic Sans MS", 14, QFont::Bold);
         detailsLabel->setFont(cuteFont);
 
+        /*TODO: Refactor to a QLabel like meadowLabel*/
         QPixmap bearImage("/Users/mattc/CLionProjects/calculator/bear_cute.png");
         if (bearImage.isNull()) {
-            qDebug() << "Failed to load the image!";
+            qDebug() << "Failed to load the image!: BEAR";
             return -1;
         }
         qDebug() << "Loaded image successfully! Size: " << bearImage.size();
@@ -86,7 +89,8 @@ int main(int argc, char* argv[]) {
         auto *layout = new QHBoxLayout;
         layout->addWidget(detailsLabel);
         layout->addWidget(imageLabel);
-        layout->setMargin(10);
+        //layout->setMargin(10);
+        layout->setContentsMargins(10, 10, 10, 10);
         layout->addWidget(meadowLabel);
 
         QWidget window;
