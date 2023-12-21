@@ -19,14 +19,16 @@ class GameBoard : public QGraphicsView {
 public:
     explicit GameBoard(QWidget* parent = nullptr);
     QGraphicsScene* getScene() const;
-    int getScore() const;
+    int getScore();
     int getGameBoardWidth() const;
     int getGameBoardHeight() const;
     int getPlayButtonWidth() const;
     int getPlayButtonHeight() const;
     int getQuitButtonWidth() const;
     int getQuitButtonHeight() const;
-    int getBlueberriesEaten() const;
+    int getBlueberriesEaten();
+    void increaseScore();
+    void increaseBlueberriesEaten();
 
 public slots:
     static void startGame();

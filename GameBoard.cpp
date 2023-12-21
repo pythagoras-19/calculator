@@ -5,6 +5,7 @@
 #include "GameBoard.h"
 
 GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
+    this->setWindowTitle("Bear's Blueberry Adventure v.27.1");
     this->score = 0;
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
@@ -13,18 +14,20 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->quitButtonHeight = 50;
     this->quitButtonWidth = 200;
     this->blueberriesEaten = 0;
-    playButton = new QPushButton("Play", this);
+    playButton = new QPushButton("Play :)", this);
     playButton->setGeometry(
             (this->getGameBoardWidth()/2 - playButtonWidth/2),
             0,
             this->getPlayButtonWidth(),
             this->getPlayButtonHeight());
-    quitButton = new QPushButton("Quit", this);
+    playButton->setStyleSheet("QPushButton { background-color: blue; color: white; }");
+    quitButton = new QPushButton("Quit :)", this);
     quitButton->setGeometry(
             (this->getGameBoardWidth()/2 - quitButtonWidth/2),
             600 - this->getQuitButtonHeight(),
             this->getQuitButtonWidth(),
             this->getQuitButtonHeight());
+    quitButton->setStyleSheet("QPushButton { background-color: red; color: white; }");
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0, 0, 800, 600);
     this->setScene(scene);
@@ -53,7 +56,7 @@ QGraphicsScene *GameBoard::getScene() const {
     return this->scene;
 }
 
-int GameBoard::getScore() const {
+int GameBoard::getScore() {
     return this->score;
 }
 
@@ -88,7 +91,17 @@ int GameBoard::getQuitButtonHeight() const {
     return this->quitButtonHeight;
 }
 
-int GameBoard::getBlueberriesEaten() const {
+int GameBoard::getBlueberriesEaten() {
     return this->blueberriesEaten;
 }
+
+void GameBoard::increaseScore() {
+    this->score++;
+}
+
+void GameBoard::increaseBlueberriesEaten() {
+    this->blueberriesEaten++;
+}
+
+
 
