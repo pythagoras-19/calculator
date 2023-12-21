@@ -1,5 +1,0 @@
-/Users/mattc/CLionProjects/calculator/cmake-build-debug/CMakeFiles/calculator.dir
-/Users/mattc/CLionProjects/calculator/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/mattc/CLionProjects/calculator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/mattc/CLionProjects/calculator/cmake-build-debug/CMakeFiles/calculator_autogen_timestamp_deps.dir
-/Users/mattc/CLionProjects/calculator/cmake-build-debug/CMakeFiles/calculator_autogen.dir
