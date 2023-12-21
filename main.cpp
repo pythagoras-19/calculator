@@ -1,7 +1,7 @@
 #include "ClickableLabel.h"
 #include "Animal.h"
+#include "GameBoard.h"
 #include <QApplication>
-#include <QDebug>
 #include <QPixmap>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -10,11 +10,43 @@
 #include <QFont>
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
+
     try {
+        // ----------------- GAME BOARD SETUP -----------------
+        GameBoard gameBoard;
+        gameBoard.setSceneRect(0, 0, 800, 600);
+
+        auto *meadowPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
+        gameBoard.getScene()->addItem(meadowPixmap);
+
+        auto *bearPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
+        bearPixmap->setPos(100, 100);
+        bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
+        gameBoard.getScene()->addItem(bearPixmap);
+
+        auto *blueberryPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
+        blueberryPixmap->setPos(300, 200);
+        blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
+        gameBoard.getScene()->addItem(blueberryPixmap);
+
+        auto *scoreText = new QGraphicsTextItem("Score: 0");
+        scoreText->setPos(700, 50);
+        gameBoard.getScene()->addItem(scoreText);
+
+        gameBoard.show();
+
+        // ----------------- ANIMAL APP -----------------
         auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1",
                                 "Roar","Brown", "canidae");
         QString bearDetails;
@@ -30,41 +62,42 @@ int main(int argc, char* argv[]) {
         bearDetails.append("Successfully created an animal and calculator object.\n");
 
         // set up images
-        QLabel *detailsLabel = new QLabel(bearDetails);
+        auto *detailsLabel = new QLabel(bearDetails);
         detailsLabel->setTextFormat(Qt::RichText);
 
-        QLabel *meadowLabel = new QLabel;
+        auto *meadowLabel = new QLabel;
         meadowLabel->setPixmap(QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
         meadowLabel->setMinimumSize(100, 100);
         meadowLabel->hide();
 
-        QGraphicsOpacityEffect *meadowOpacityEffect = new QGraphicsOpacityEffect(meadowLabel);
+        auto *meadowOpacityEffect = new QGraphicsOpacityEffect(meadowLabel);
         meadowLabel->setGraphicsEffect(meadowOpacityEffect);
         meadowOpacityEffect->setOpacity(0.0); // start fully transparent
 
         QFont cuteFont("Comic Sans MS", 14, QFont::Bold);
         detailsLabel->setFont(cuteFont);
 
+        /*TODO: Refactor to a QLabel like meadowLabel*/
         QPixmap bearImage("/Users/mattc/CLionProjects/calculator/bear_cute.png");
         if (bearImage.isNull()) {
-            qDebug() << "Failed to load the image!";
+            qDebug() << "Failed to load the image!: BEAR";
             return -1;
         }
-        qDebug() << "Loaded img successfully! Size: " << bearImage.size();
+        qDebug() << "Loaded image successfully! Size: " << bearImage.size();
 
-        ClickableLabel *imageLabel = new ClickableLabel;
+        auto *imageLabel = new ClickableLabel;
         imageLabel->setPixmap(bearImage);
         imageLabel->setMinimumSize(100, 100);
         imageLabel->setStyleSheet("border: 1px solid red;");
         detailsLabel->setStyleSheet("border: 1px solid blue;");
 
-        QGraphicsOpacityEffect *bearOpacityEffect = new QGraphicsOpacityEffect(imageLabel);
+        auto *bearOpacityEffect = new QGraphicsOpacityEffect(imageLabel);
         imageLabel->setGraphicsEffect(bearOpacityEffect);
         bearOpacityEffect->setOpacity(1.0); // start fully visible
 
-        // create fade out animation on click of bear image
+        // fade out animation on click of bear image
         QObject::connect(imageLabel, &ClickableLabel::clicked, [&](){
-            QPropertyAnimation *fadeOutAnimation =
+            auto *fadeOutAnimation =
                     new QPropertyAnimation(bearOpacityEffect, "opacity");
             fadeOutAnimation->setDuration(1000); // 1 second for fade-out
             fadeOutAnimation->setStartValue(1.0); // Start fully visible
@@ -73,39 +106,27 @@ int main(int argc, char* argv[]) {
             // fade in meadow image
             QObject::connect(fadeOutAnimation, &QPropertyAnimation::finished, [&](){
                 imageLabel->hide();
-
                 meadowLabel->show();
-                QPropertyAnimation *fadeInAnimation =
+                auto *fadeInAnimation =
                         new QPropertyAnimation(meadowOpacityEffect, "opacity");
                 fadeInAnimation->setDuration(1000);
-                fadeInAnimation->setStartValue(0.0);
-                fadeInAnimation->setEndValue(1.0);
+                fadeInAnimation->setStartValue(0.0); // start invisible
+                fadeInAnimation->setEndValue(1.0); // fade to fully visible
                 fadeInAnimation->start(QAbstractAnimation::DeleteWhenStopped);
             });
             fadeOutAnimation->start(QAbstractAnimation::DeleteWhenStopped);
         });
 
-        // create fade in animation on click of meadow image
-
-        QHBoxLayout *layout = new QHBoxLayout;
+        auto *layout = new QHBoxLayout;
         layout->addWidget(detailsLabel);
         layout->addWidget(imageLabel);
-        layout->setMargin(10);
+        layout->setContentsMargins(10, 10, 10, 10);
         layout->addWidget(meadowLabel);
 
         QWidget window;
         window.setLayout(layout);
         window.setWindowTitle("Animal App v.37.0");
         window.setMinimumSize(800, 300);
-        /*
-        QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(&window);
-        window.setGraphicsEffect(opacityEffect);
-        QPropertyAnimation *animation = new QPropertyAnimation(opacityEffect, "opacity");
-        animation->setDuration(5000);
-        animation->setStartValue(0.0); // start fully transparent
-        animation->setEndValue(1.0); // end fully opaque
-        animation->start();
-         */
         window.show();
 
         return QApplication::exec();

@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.26"
+						"string" : "3.16"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -43,7 +43,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "calculator::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-calculator-Debug-3174b46ad44520689743.json",
+					"jsonFile" : "target-calculator-Debug-3d2e973ab401c8cd816a.json",
 					"name" : "calculator",
 					"projectIndex" : 0
 				},

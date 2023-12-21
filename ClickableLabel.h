@@ -15,12 +15,10 @@ class ClickableLabel : public QLabel {
 
 public:
     explicit ClickableLabel(QWidget* parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
-    int rotation() const;
-    void setRotation(int rotation);
+    ~ClickableLabel() override;
 
 signals:
     void clicked();
-    void rotationChanged();
 
 
 protected:
