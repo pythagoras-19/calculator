@@ -10,21 +10,45 @@
 #include <QLabel>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
+#include <QPushButton>
+#include <QApplication>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
 
-    QGraphicsScene *scene;
-
 public:
     explicit GameBoard(QWidget* parent = nullptr);
-    QGraphicsScene* getScene() const;  // Getter for the scene
+    QGraphicsScene* getScene() const;
+    int getScore() const;
+    int getGameBoardWidth() const;
+    int getGameBoardHeight() const;
+    int getPlayButtonWidth() const;
+    int getPlayButtonHeight() const;
+    int getQuitButtonWidth() const;
+    int getQuitButtonHeight() const;
+    int getBlueberriesEaten() const;
+
+public slots:
+    static void startGame();
+    static void quitGame();
 
 private:
+    QGraphicsScene *scene;
+    int blueberriesEaten;
     int score;
+    int playButtonWidth;
+    int playButtonHeight;
+    int gameBoardWidth;
+    int gameBoardHeight;
+    int quitButtonWidth;
+    int quitButtonHeight;
     QLabel *scoreLabel;
     QGraphicsPixmapItem *bearItem;
     QGraphicsPixmapItem *blueberryItem;
+    QPushButton *playButton;
+    QPushButton *quitButton;
+    //TODO: pause button
+    //TODO: resume button
 };
 
 
