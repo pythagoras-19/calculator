@@ -8,17 +8,23 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QLabel>
-// #include <QSoundEffect>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsTextItem>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
 
+    QGraphicsScene *scene;
+
 public:
     explicit GameBoard(QWidget* parent = nullptr);
+    QGraphicsScene* getScene() const;  // Getter for the scene
 
 private:
     int score;
     QLabel *scoreLabel;
+    QGraphicsPixmapItem *bearItem;
+    QGraphicsPixmapItem *blueberryItem;
 };
 
 

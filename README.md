@@ -13,7 +13,7 @@ This project uses Qt for the GUI.
 - **get the play button working**
 - **get the image for the moving bear**
 - **get the berrie image that the bear will go after**
-
+- **Integrate the game board with original meadow**
 ## Steps:
 1. Set Up the Basic Application Structure
    Create a new Qt project.

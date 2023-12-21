@@ -10,12 +10,43 @@
 #include <QFont>
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
-#include <QGraphicsView>
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
+
     try {
+        // ----------------- GAME BOARD SETUP -----------------
+        GameBoard gameBoard;
+        gameBoard.setSceneRect(0, 0, 800, 600);
+
+        auto *meadowPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
+        gameBoard.getScene()->addItem(meadowPixmap);
+
+        auto *bearPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
+        bearPixmap->setPos(100, 100);
+        bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
+        gameBoard.getScene()->addItem(bearPixmap);
+
+        auto *blueberryPixmap =
+                new QGraphicsPixmapItem(
+                        QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
+        blueberryPixmap->setPos(300, 200);
+        blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
+        gameBoard.getScene()->addItem(blueberryPixmap);
+
+        auto *scoreText = new QGraphicsTextItem("Score: 0");
+        scoreText->setPos(700, 50);
+        gameBoard.getScene()->addItem(scoreText);
+
+        gameBoard.show();
+
+        // ----------------- ANIMAL APP -----------------
         auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1",
                                 "Roar","Brown", "canidae");
         QString bearDetails;
@@ -89,7 +120,6 @@ int main(int argc, char* argv[]) {
         auto *layout = new QHBoxLayout;
         layout->addWidget(detailsLabel);
         layout->addWidget(imageLabel);
-        //layout->setMargin(10);
         layout->setContentsMargins(10, 10, 10, 10);
         layout->addWidget(meadowLabel);
 
