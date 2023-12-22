@@ -24,11 +24,13 @@ public:
     void setSound(std::string sound);
     void setColor(std::string color);
     void setType(std::string type);
+    void setSpeed(double speed);
 
     //getter functions
     double getWeight() const;
     double getHeight() const;
     double getBeastLevel() const;
+    double getSpeed() const;
     std::string getWhatItEats();
     std::string getName();
     std::string getSound();
@@ -63,7 +65,8 @@ private:
     std::string color{}; // this is the color of the animal
     std::string type{}; // this is the type of animal
     int energy{}; // this is the energy level of the animal
-    [[maybe_unused]] int animalID{};
+    double speed;
+    int animalID{};
 };
 
 

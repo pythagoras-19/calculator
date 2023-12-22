@@ -20,6 +20,7 @@ Animal::Animal(double weight, double height, double beastLevel, std::string what
     this->sound = std::move(sound);
     this->color = std::move(color);
     this->type = std::move(type);
+    this->speed = 5.0;
 }
 
 void Animal::setWeight(double weight) {
@@ -72,13 +73,10 @@ std::string Animal::getColor() {
 std::string Animal::getType() {
     return this->type;
 }
-//destructor
 Animal::~Animal() {
     cout << "Animal " << this->name << " has been destroyed" << endl;
 }
-//other functions that need to be implemented
-// TODO: implement these functions
-[[maybe_unused]] void Animal::makeSound() {
+void Animal::makeSound() {
     cout << this->sound << endl;
 }
 void Animal::eat() {
@@ -106,4 +104,10 @@ void Animal::reproduce() {
 }
 void Animal::grow() {
     cout << this->name << " is growing" << endl;
+}
+void Animal::setSpeed(double speed) {
+    this->speed = speed;
+}
+double Animal::getSpeed() const {
+    return this->speed;
 }
