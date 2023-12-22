@@ -84,7 +84,6 @@ QGraphicsScene *GameBoard::getScene() const {
 void GameBoard::startGame() {
     playButton->hide();
     updateGame();
-    startCollisionDetection();
 }
 
 void GameBoard::quitGame() {
@@ -153,6 +152,7 @@ void GameBoard::startCollisionDetection() {
 
 void GameBoard::updateGame() {
     gameTimer->start(1000);
+    startCollisionDetection();
 }
 
 
