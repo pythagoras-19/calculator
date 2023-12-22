@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     try {
         // ----------------- GAME BOARD SETUP -----------------
         GameBoard gameBoard;
-        gameBoard.setSceneRect(0, 0, 800, 600);
+        gameBoard.setSceneRect(0, 0, gameBoard.getGameBoardWidth(), gameBoard.getGameBoardHeight());
 
         auto *meadowPixmap =
                 new QGraphicsPixmapItem(
@@ -39,10 +39,6 @@ int main(int argc, char* argv[]) {
         blueberryPixmap->setPos(300, 200);
         blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
         gameBoard.getScene()->addItem(blueberryPixmap);
-
-        auto *scoreText = new QGraphicsTextItem("Score: 0");
-        scoreText->setPos(700, 50);
-        gameBoard.getScene()->addItem(scoreText);
 
         gameBoard.show();
 
