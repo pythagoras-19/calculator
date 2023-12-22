@@ -35,6 +35,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->setFixedSize(800, 600);
     scoreLabel = new QLabel("Blueberries Eaten: " + QString::number(this->blueberriesEaten), this);
     scoreLabel->setGeometry(0, 0, 200, 20);
+    scoreLabel->setStyleSheet("QLabel { color: black; }");
     connect(playButton, &QPushButton::clicked, this, &GameBoard::startGame);
     connect(quitButton, &QPushButton::clicked, this, &GameBoard::quitGame);
     this->scene->addWidget(playButton);
@@ -56,11 +57,10 @@ QGraphicsScene *GameBoard::getScene() const {
     return this->scene;
 }
 
-int GameBoard::getScore() {
-    return this->score;
-}
-
 void GameBoard::startGame() {
+    /*
+     * TODO: add a timer to move the blueberry around the screen
+     * */
 }
 
 void GameBoard::quitGame() {

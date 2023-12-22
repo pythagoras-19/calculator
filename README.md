@@ -1,4 +1,4 @@
-# calculator
+# Codename: calculator
 Codename Calculator. 
 Essentially a random project proving that code drives architecture. 
 As I solve problems and want to add more to my application, the architecture changes.

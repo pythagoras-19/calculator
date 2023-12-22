@@ -40,10 +40,6 @@ int main(int argc, char* argv[]) {
         blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
         gameBoard.getScene()->addItem(blueberryPixmap);
 
-        auto *scoreText = new QGraphicsTextItem("Score: " + QString::number(gameBoard.getScore()));
-        scoreText->setPos(710, 0);
-        gameBoard.getScene()->addItem(scoreText);
-
         gameBoard.show();
 
         // ----------------- ANIMAL APP -----------------

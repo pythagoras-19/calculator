@@ -19,7 +19,6 @@ class GameBoard : public QGraphicsView {
 public:
     explicit GameBoard(QWidget* parent = nullptr);
     QGraphicsScene* getScene() const;
-    int getScore();
     int getGameBoardWidth() const;
     int getGameBoardHeight() const;
     int getPlayButtonWidth() const;
