@@ -6,6 +6,7 @@
 
 GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->setWindowTitle("Bear's Blueberry Adventure v.27.2");
+    this->gameTimer = new QTimer(this);
     this->score = 0;
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
@@ -54,6 +55,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     scoreLabel = new QLabel("Blueberries Eaten: " + QString::number(this->blueberriesEaten), this);
     scoreLabel->setGeometry(0, 0, 200, 20);
     scoreLabel->setStyleSheet("QLabel { color: black; }");
+    connect(gameTimer, &QTimer::timeout, this, &GameBoard::updateGame);
     connect(playButton, &QPushButton::clicked, this, &GameBoard::startGame);
     connect(quitButton, &QPushButton::clicked, this, &GameBoard::quitGame);
     connect(pauseButton, &QPushButton::clicked, this, &GameBoard::pauseGame);
@@ -80,9 +82,9 @@ QGraphicsScene *GameBoard::getScene() const {
 }
 
 void GameBoard::startGame() {
-    /*
-     * TODO: add a timer to move the blueberry around the screen
-     * */
+    playButton->hide();
+    updateGame();
+    startCollisionDetection();
 }
 
 void GameBoard::quitGame() {
@@ -145,5 +147,12 @@ int GameBoard::getResumeButtonWidth() const {
     return this->resumeButtonWidth;
 }
 
+void GameBoard::startCollisionDetection() {
+    //
+}
+
+void GameBoard::updateGame() {
+    gameTimer->start(1000);
+}
 
 

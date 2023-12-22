@@ -12,6 +12,7 @@
 #include <QGraphicsTextItem>
 #include <QPushButton>
 #include <QApplication>
+#include <QTimer>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
@@ -32,12 +33,15 @@ public:
     int getBlueberriesEaten();
     void increaseScore();
     void increaseBlueberriesEaten();
+    void startCollisionDetection();
 
 public slots:
-    static void startGame();
-    static void quitGame();
-    static void pauseGame();
-    static void resumeGame();
+    void startGame();
+    void quitGame();
+    void pauseGame();
+    void resumeGame();
+    void updateGame();
+
 
 private:
     QGraphicsScene *scene;
@@ -60,6 +64,7 @@ private:
     QPushButton *quitButton;
     QPushButton *pauseButton;
     QPushButton *resumeButton;
+    QTimer *gameTimer;
 };
 
 
