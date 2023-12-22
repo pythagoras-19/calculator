@@ -13,6 +13,8 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->playButtonWidth = 200;
     this->quitButtonHeight = 50;
     this->quitButtonWidth = 200;
+    this->pauseButtonHeight = 50;
+    this->pauseButtonWidth = 100;
     this->blueberriesEaten = 0;
     playButton = new QPushButton("Play :)", this);
     playButton->setGeometry(
@@ -28,6 +30,13 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
             this->getQuitButtonWidth(),
             this->getQuitButtonHeight());
     quitButton->setStyleSheet("QPushButton { background-color: red; color: white; }");
+    pauseButton = new QPushButton("Pause :)", this);
+    pauseButton->setGeometry(
+            (this->getGameBoardWidth() - 100),
+            0,
+            this->getPauseButtonWidth(),
+            this->getPauseButtonHeight());
+    pauseButton->setStyleSheet("QPushButton { background-color: yellow; color: black; }");
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0, 0, 800, 600);
     this->setScene(scene);
@@ -101,6 +110,14 @@ void GameBoard::increaseScore() {
 
 void GameBoard::increaseBlueberriesEaten() {
     this->blueberriesEaten++;
+}
+
+int GameBoard::getPauseButtonWidth() const {
+    return this->pauseButtonWidth;
+}
+
+int GameBoard::getPauseButtonHeight() const {
+    return this->pauseButtonHeight;
 }
 
 

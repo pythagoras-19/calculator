@@ -25,6 +25,8 @@ public:
     int getPlayButtonHeight() const;
     int getQuitButtonWidth() const;
     int getQuitButtonHeight() const;
+    int getPauseButtonWidth() const;
+    int getPauseButtonHeight() const;
     int getBlueberriesEaten();
     void increaseScore();
     void increaseBlueberriesEaten();
@@ -37,6 +39,8 @@ private:
     QGraphicsScene *scene;
     int blueberriesEaten;
     int score;
+    int pauseButtonWidth;
+    int pauseButtonHeight;
     int playButtonWidth;
     int playButtonHeight;
     int gameBoardWidth;
@@ -48,6 +52,7 @@ private:
     QGraphicsPixmapItem *blueberryItem;
     QPushButton *playButton;
     QPushButton *quitButton;
+    QPushButton *pauseButton;
     //TODO: pause button
     //TODO: resume button
 };
