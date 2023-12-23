@@ -5,6 +5,7 @@
 #ifndef CALCULATOR_GAMEBOARD_H
 #define CALCULATOR_GAMEBOARD_H
 
+#include "Blueberry.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QLabel>
@@ -13,6 +14,7 @@
 #include <QPushButton>
 #include <QApplication>
 #include <QTimer>
+#include <QPixmap>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
@@ -34,6 +36,7 @@ public:
     void increaseScore();
     void increaseBlueberriesEaten();
     void startCollisionDetection();
+    ~GameBoard() override;
 
 public slots:
     void startGame();
@@ -46,7 +49,6 @@ public slots:
 private:
     QGraphicsScene *scene;
     int blueberriesEaten;
-    int score;
     int resumeButtonWidth;
     int resumeButtonHeight;
     int pauseButtonWidth;
@@ -58,13 +60,18 @@ private:
     int quitButtonWidth;
     int quitButtonHeight;
     QLabel *scoreLabel;
-    QGraphicsPixmapItem *bearItem;
-    QGraphicsPixmapItem *blueberryItem;
     QPushButton *playButton;
     QPushButton *quitButton;
     QPushButton *pauseButton;
     QPushButton *resumeButton;
     QTimer *gameTimer;
+    QLabel *clockLabel;
+    int elapsedTime;
+    Blueberry *bb;
+    bool isGamePaused;
+    bool isGameStarted;
+    bool isGameQuit;
+    bool isGameResumed;
 };
 
 

@@ -5,9 +5,41 @@
 #include "GameBoard.h"
 
 GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
+    isGameStarted = false;
+    isGamePaused = false;
+    isGameQuit = false;
+    isGameResumed = false;
+    gameTimer = new QTimer(this);
+    clockLabel = new QLabel(this);
+    bb = new Blueberry();
+    elapsedTime = 0;
+
+    scene = new QGraphicsScene(this);
+    scene->setSceneRect(0, 0, 800, 600);
+    this->setScene(scene);
+
+    auto *meadowPixmap = new QGraphicsPixmapItem(
+            QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
+    scene->addItem(meadowPixmap);
+
+    auto *bearPixmap = new QGraphicsPixmapItem(
+            QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
+    bearPixmap->setPos(100, 100);
+    bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
+    scene->addItem(bearPixmap);
+
+    auto *blueberryPixmap = new QGraphicsPixmapItem(
+            QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
+    blueberryPixmap->setPos(bb->getXPosition(), bb->getYPosition());
+    blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
+    scene->addItem(blueberryPixmap);
+
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    clockLabel->setGeometry(0, 20, 200, 20);
+    clockLabel->setStyleSheet("QLabel { color: black; }");
+
     this->setWindowTitle("Bear's Blueberry Adventure v.27.2");
     this->gameTimer = new QTimer(this);
-    this->score = 0;
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
     this->playButtonHeight = 50;
@@ -47,10 +79,6 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
             this->getResumeButtonWidth(),
             this->getResumeButtonHeight());
     resumeButton->setStyleSheet("QPushButton { background-color: green; color: black; }");
-    scene = new QGraphicsScene(this);
-    scene->setSceneRect(0, 0, 800, 600);
-    this->setScene(scene);
-    scene->setSceneRect(0, 0, 800, 600);
     this->setFixedSize(800, 600);
     scoreLabel = new QLabel("Blueberries Eaten: " + QString::number(this->blueberriesEaten), this);
     scoreLabel->setGeometry(0, 0, 200, 20);
@@ -65,16 +93,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->scene->addWidget(pauseButton);
     this->scene->addWidget(resumeButton);
 
-    // Load bear image
-    QPixmap bearPixmap("/Users/mattc/CLionProjects/calculator/game_bear_cute.jpeg");
-    bearItem = new QGraphicsPixmapItem(bearPixmap);
-    scene->addItem(bearItem);
-    bearItem->setPos(100, 100);
-    // Load blueberry image
-    QPixmap blueberryPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg");
-    blueberryItem = new QGraphicsPixmapItem(blueberryPixmap);
-    scene->addItem(blueberryItem);
-    blueberryItem->setPos(300, 300);
+    gameTimer->setInterval(1000);
 }
 
 QGraphicsScene *GameBoard::getScene() const {
@@ -83,19 +102,24 @@ QGraphicsScene *GameBoard::getScene() const {
 
 void GameBoard::startGame() {
     playButton->hide();
+    gameTimer->start();
+    isGameStarted = true;
     updateGame();
 }
 
 void GameBoard::quitGame() {
+    isGameQuit = true;
     QApplication::quit();
 }
 
 void GameBoard::pauseGame() {
-    // TODO: FINISH
+    isGamePaused = true;
+    gameTimer->stop();
 }
 
 void GameBoard::resumeGame() {
-    // TODO: FINISH
+    isGamePaused = true;
+    gameTimer->start(1000);
 }
 
 int GameBoard::getGameBoardWidth() const {
@@ -147,12 +171,29 @@ int GameBoard::getResumeButtonWidth() const {
 }
 
 void GameBoard::startCollisionDetection() {
-    //
+    // TODO: FINISH ME
 }
 
 void GameBoard::updateGame() {
-    gameTimer->start(1000);
-    startCollisionDetection();
+    qDebug("GameBoard::updateGame() called Initially.");
+    elapsedTime++;
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    bb->move();
+    //TODO: startCollisionDetection();
+    scene->update();
+    qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);
+}
+
+GameBoard::~GameBoard() {
+    delete bb;
+    delete scene;
+    delete gameTimer;
+    delete clockLabel;
+    delete playButton;
+    delete quitButton;
+    delete pauseButton;
+    delete resumeButton;
+    delete scoreLabel;
 }
 
 
