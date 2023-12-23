@@ -7,10 +7,12 @@
 Blueberry::Blueberry() {
     this->xPosition = 300;
     this->yPosition = 200;
+    this->width = 100;
+    this->height = 100;
 }
 
 QRectF Blueberry::boundingRect() const {
-    return QRectF(xPosition, yPosition, 50, 50);
+    return QRectF(xPosition, yPosition, width, height);
 }
 
 void Blueberry::randomizePosition() {
@@ -50,12 +52,20 @@ void Blueberry::setPosition(int xPosition, int yPosition) {
 
 void Blueberry::move() {
     qDebug("Blueberry::move() called.");
-    xPosition += 10;
-    qDebug("Made it after xPosition += 10");
+    xPosition += 50;
+    qDebug("Made it after xPosition += 50");
     // this->setPos(xPosition, yPosition);
     this->setPosition(xPosition, yPosition);
     qDebug("%s", "Blueberry::move() moved blueberry 10 spaces to the right.");
     qDebug("xPosition: %d", xPosition);
     this->update();
+}
+
+int Blueberry::getBlueberryHeight() const {
+    return this->height;
+}
+
+int Blueberry::getBlueberryWidth() const {
+    return this->width;
 }
 

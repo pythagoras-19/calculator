@@ -31,7 +31,8 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     auto *blueberryPixmap = new QGraphicsPixmapItem(
             QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
     blueberryPixmap->setPos(bb->getXPosition(), bb->getYPosition());
-    blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
+    blueberryPixmap->setPixmap(
+            blueberryPixmap->pixmap().scaled(bb->getBlueberryWidth(), bb->getBlueberryHeight()));
     scene->addItem(blueberryPixmap);
 
     clockLabel->setText("Time: " + QString::number(elapsedTime));
