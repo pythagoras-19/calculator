@@ -15,3 +15,6 @@ This project uses Qt for the GUI.
   - like when the bear collides with the berry it says "Yum!"
   - when it collides with a wall it says "Ouch!"
   - when the user hits play the image of the bear does an animation
+## What is up with the `Blueberry crash` in v.27.2?
+## Restructure code so all gameboard logic is in gameboard
+  - QUESTION: Does the gameboard logic have to be in main.cpp?
