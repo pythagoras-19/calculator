@@ -15,3 +15,5 @@ This project uses Qt for the GUI.
   - when it collides with a wall it says "Ouch!"
   - when the user hits play the image of the bear does an animation
 - Movement for blueberry and bear
+# Bugs
+- Berry disappears prematurely

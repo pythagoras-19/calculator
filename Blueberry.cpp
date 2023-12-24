@@ -34,11 +34,6 @@ int Blueberry::getYPosition() const {
     return yPosition;
 }
 
-void Blueberry::setPosition(int xPosition, int yPosition) {
-    this->xPosition = xPosition;
-    this->yPosition = yPosition;
-}
-
 void Blueberry::move() {
     qDebug("Blueberry::move() called.");
     xPosition += 10;
