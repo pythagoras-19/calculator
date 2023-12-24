@@ -9,6 +9,7 @@
 #include <random>
 #include <QPainter>
 #include <QRectF>
+#include <QPixmap>
 
 class Blueberry : public QGraphicsItem {
 public:

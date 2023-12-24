@@ -9,9 +9,11 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     isGamePaused = false;
     isGameQuit = false;
     isGameResumed = false;
+    isGameRestarted = false;
     gameTimer = new QTimer(this);
     clockLabel = new QLabel(this);
     bb = new Blueberry();
+    //bear = new Animal();
     elapsedTime = 0;
 
     scene = new QGraphicsScene(this);
@@ -28,12 +30,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
     scene->addItem(bearPixmap);
 
-    auto *blueberryPixmap = new QGraphicsPixmapItem(
-            QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
-    blueberryPixmap->setPos(bb->getXPosition(), bb->getYPosition());
-    blueberryPixmap->setPixmap(
-            blueberryPixmap->pixmap().scaled(bb->getBlueberryWidth(), bb->getBlueberryHeight()));
-    scene->addItem(blueberryPixmap);
+    scene->addItem(bb);
 
     clockLabel->setText("Time: " + QString::number(elapsedTime));
     clockLabel->setGeometry(0, 20, 200, 20);
@@ -51,6 +48,8 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->pauseButtonWidth = 100;
     this->resumeButtonHeight = 50;
     this->resumeButtonWidth = 100;
+    this->restartButtonHeight = 50;
+    this->restartButtonWidth = 100;
     this->blueberriesEaten = 0;
     playButton = new QPushButton("Play :)", this);
     playButton->setGeometry(
@@ -80,6 +79,13 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
             this->getResumeButtonWidth(),
             this->getResumeButtonHeight());
     resumeButton->setStyleSheet("QPushButton { background-color: green; color: black; }");
+    restartButton = new QPushButton("Restart :)", this);
+    restartButton->setGeometry(
+            (this->getGameBoardWidth() - restartButtonWidth),
+            0 + this->pauseButtonHeight + this->resumeButtonHeight,
+            this->restartButtonWidth,
+            this->restartButtonHeight);
+    restartButton->setStyleSheet("QPushButton { background-color: purple; color: black; }");
     this->setFixedSize(800, 600);
     scoreLabel = new QLabel("Blueberries Eaten: " + QString::number(this->blueberriesEaten), this);
     scoreLabel->setGeometry(0, 0, 200, 20);
@@ -89,10 +95,12 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     connect(quitButton, &QPushButton::clicked, this, &GameBoard::quitGame);
     connect(pauseButton, &QPushButton::clicked, this, &GameBoard::pauseGame);
     connect(resumeButton, &QPushButton::clicked, this, &GameBoard::resumeGame);
+    connect(restartButton, &QPushButton::clicked, this, &GameBoard::restartGame);
     this->scene->addWidget(playButton);
     this->scene->addWidget(quitButton);
     this->scene->addWidget(pauseButton);
     this->scene->addWidget(resumeButton);
+    this->scene->addWidget(restartButton);
 
     gameTimer->setInterval(1000);
 }
@@ -102,7 +110,7 @@ QGraphicsScene *GameBoard::getScene() const {
 }
 
 void GameBoard::startGame() {
-    playButton->hide();
+    // playButton->hide();
     gameTimer->start();
     isGameStarted = true;
     updateGame();
@@ -121,6 +129,17 @@ void GameBoard::pauseGame() {
 void GameBoard::resumeGame() {
     isGamePaused = true;
     gameTimer->start(1000);
+}
+
+void GameBoard::restartGame() {
+    isGameRestarted = true;
+    elapsedTime = 0;
+    blueberriesEaten = 0;
+    scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    bb->setPos(300, 200);
+    gameTimer->start(1000);
+    updateGame();
 }
 
 int GameBoard::getGameBoardWidth() const {
@@ -169,6 +188,14 @@ int GameBoard::getResumeButtonHeight() const {
 
 int GameBoard::getResumeButtonWidth() const {
     return this->resumeButtonWidth;
+}
+
+int GameBoard::getRestartButtonWidth() const {
+    return this->restartButtonWidth;
+}
+
+int GameBoard::getRestartButtonHeight() const {
+    return this->restartButtonHeight;
 }
 
 void GameBoard::startCollisionDetection() {

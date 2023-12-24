@@ -6,6 +6,7 @@
 #define CALCULATOR_GAMEBOARD_H
 
 #include "Blueberry.h"
+#include "Animal.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QLabel>
@@ -32,6 +33,8 @@ public:
     int getPauseButtonHeight() const;
     int getResumeButtonWidth() const;
     int getResumeButtonHeight() const;
+    int getRestartButtonWidth() const;
+    int getRestartButtonHeight() const;
     int getBlueberriesEaten();
     void increaseScore();
     void increaseBlueberriesEaten();
@@ -44,6 +47,7 @@ public slots:
     void pauseGame();
     void resumeGame();
     void updateGame();
+    void restartGame();
 
 
 private:
@@ -59,19 +63,24 @@ private:
     int gameBoardHeight;
     int quitButtonWidth;
     int quitButtonHeight;
+    int restartButtonWidth;
+    int restartButtonHeight;
     QLabel *scoreLabel;
     QPushButton *playButton;
     QPushButton *quitButton;
     QPushButton *pauseButton;
     QPushButton *resumeButton;
+    QPushButton *restartButton;
     QTimer *gameTimer;
     QLabel *clockLabel;
     int elapsedTime;
     Blueberry *bb;
+    Animal *bear;
     bool isGamePaused;
     bool isGameStarted;
     bool isGameQuit;
     bool isGameResumed;
+    bool isGameRestarted;
 };
 
 
