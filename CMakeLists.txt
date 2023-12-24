@@ -31,6 +31,8 @@ add_executable(
         ClickableLabel.h
         GameBoard.cpp
         GameBoard.h
+        Blueberry.cpp
+        Blueberry.h
 )
 
 # link the Qt6 libraries and MongoDB driver libraries

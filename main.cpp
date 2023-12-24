@@ -18,29 +18,8 @@ int main(int argc, char* argv[]) {
 
     try {
         // ----------------- GAME BOARD SETUP -----------------
-        GameBoard gameBoard;
-        gameBoard.setSceneRect(0, 0, gameBoard.getGameBoardWidth(), gameBoard.getGameBoardHeight());
-
-        auto *meadowPixmap =
-                new QGraphicsPixmapItem(
-                        QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
-        gameBoard.getScene()->addItem(meadowPixmap);
-
-        auto *bearPixmap =
-                new QGraphicsPixmapItem(
-                        QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
-        bearPixmap->setPos(100, 100);
-        bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
-        gameBoard.getScene()->addItem(bearPixmap);
-
-        auto *blueberryPixmap =
-                new QGraphicsPixmapItem(
-                        QPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg"));
-        blueberryPixmap->setPos(300, 200);
-        blueberryPixmap->setPixmap(blueberryPixmap->pixmap().scaled(100, 100));
-        gameBoard.getScene()->addItem(blueberryPixmap);
-
-        gameBoard.show();
+        GameBoard gameboard;
+        gameboard.show();
 
         // ----------------- ANIMAL APP -----------------
         auto *bear = new Animal(500.0, 15.0, 20.0, "berries", "Bear1",

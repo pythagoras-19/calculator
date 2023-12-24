@@ -5,8 +5,38 @@
 #include "GameBoard.h"
 
 GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
-    this->setWindowTitle("Bear's Blueberry Adventure v.27.1");
-    this->score = 0;
+    isGameStarted = false;
+    isGamePaused = false;
+    isGameQuit = false;
+    isGameResumed = false;
+    isGameRestarted = false;
+    gameTimer = new QTimer(this);
+    clockLabel = new QLabel(this);
+    bb = new Blueberry();
+    elapsedTime = 0;
+
+    scene = new QGraphicsScene(this);
+    scene->setSceneRect(0, 0, 800, 600);
+    this->setScene(scene);
+
+    auto *meadowPixmap = new QGraphicsPixmapItem(
+            QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
+    scene->addItem(meadowPixmap);
+
+    auto *bearPixmap = new QGraphicsPixmapItem(
+            QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
+    bearPixmap->setPos(100, 100);
+    bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
+    scene->addItem(bearPixmap);
+
+    scene->addItem(bb);
+
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    clockLabel->setGeometry(0, 20, 200, 20);
+    clockLabel->setStyleSheet("QLabel { color: black; }");
+
+    this->setWindowTitle("Bear's Blueberry Adventure v.27.2");
+    this->gameTimer = new QTimer(this);
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
     this->playButtonHeight = 50;
@@ -15,6 +45,10 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->quitButtonWidth = 200;
     this->pauseButtonHeight = 50;
     this->pauseButtonWidth = 100;
+    this->resumeButtonHeight = 50;
+    this->resumeButtonWidth = 100;
+    this->restartButtonHeight = 50;
+    this->restartButtonWidth = 100;
     this->blueberriesEaten = 0;
     playButton = new QPushButton("Play :)", this);
     playButton->setGeometry(
@@ -32,34 +66,42 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     quitButton->setStyleSheet("QPushButton { background-color: red; color: white; }");
     pauseButton = new QPushButton("Pause :)", this);
     pauseButton->setGeometry(
-            (this->getGameBoardWidth() - 100),
+            (this->getGameBoardWidth() - pauseButtonWidth),
             0,
             this->getPauseButtonWidth(),
             this->getPauseButtonHeight());
     pauseButton->setStyleSheet("QPushButton { background-color: yellow; color: black; }");
-    scene = new QGraphicsScene(this);
-    scene->setSceneRect(0, 0, 800, 600);
-    this->setScene(scene);
-    scene->setSceneRect(0, 0, 800, 600);
+    resumeButton = new QPushButton("Resume :)", this);
+    resumeButton->setGeometry(
+            (this->getGameBoardWidth() - resumeButtonWidth),
+            0 + this->getPauseButtonHeight(),
+            this->getResumeButtonWidth(),
+            this->getResumeButtonHeight());
+    resumeButton->setStyleSheet("QPushButton { background-color: green; color: black; }");
+    restartButton = new QPushButton("Restart :)", this);
+    restartButton->setGeometry(
+            (this->getGameBoardWidth() - restartButtonWidth),
+            0 + this->pauseButtonHeight + this->resumeButtonHeight,
+            this->restartButtonWidth,
+            this->restartButtonHeight);
+    restartButton->setStyleSheet("QPushButton { background-color: purple; color: black; }");
     this->setFixedSize(800, 600);
     scoreLabel = new QLabel("Blueberries Eaten: " + QString::number(this->blueberriesEaten), this);
     scoreLabel->setGeometry(0, 0, 200, 20);
     scoreLabel->setStyleSheet("QLabel { color: black; }");
+    connect(gameTimer, &QTimer::timeout, this, &GameBoard::updateGame);
     connect(playButton, &QPushButton::clicked, this, &GameBoard::startGame);
     connect(quitButton, &QPushButton::clicked, this, &GameBoard::quitGame);
+    connect(pauseButton, &QPushButton::clicked, this, &GameBoard::pauseGame);
+    connect(resumeButton, &QPushButton::clicked, this, &GameBoard::resumeGame);
+    connect(restartButton, &QPushButton::clicked, this, &GameBoard::restartGame);
     this->scene->addWidget(playButton);
-    this->getScene()->addWidget(quitButton);
+    this->scene->addWidget(quitButton);
+    this->scene->addWidget(pauseButton);
+    this->scene->addWidget(resumeButton);
+    this->scene->addWidget(restartButton);
 
-    // Load bear image
-    QPixmap bearPixmap("/Users/mattc/CLionProjects/calculator/game_bear_cute.jpeg");
-    bearItem = new QGraphicsPixmapItem(bearPixmap);
-    scene->addItem(bearItem);
-    bearItem->setPos(100, 100);
-    // Load blueberry image
-    QPixmap blueberryPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg");
-    blueberryItem = new QGraphicsPixmapItem(blueberryPixmap);
-    scene->addItem(blueberryItem);
-    blueberryItem->setPos(300, 300);
+    gameTimer->setInterval(1000);
 }
 
 QGraphicsScene *GameBoard::getScene() const {
@@ -67,13 +109,35 @@ QGraphicsScene *GameBoard::getScene() const {
 }
 
 void GameBoard::startGame() {
-    /*
-     * TODO: add a timer to move the blueberry around the screen
-     * */
+    gameTimer->start();
+    isGameStarted = true;
+    updateGame();
 }
 
 void GameBoard::quitGame() {
+    isGameQuit = true;
     QApplication::quit();
+}
+
+void GameBoard::pauseGame() {
+    isGamePaused = true;
+    gameTimer->stop();
+}
+
+void GameBoard::resumeGame() {
+    isGamePaused = true;
+    gameTimer->start(1000);
+}
+
+void GameBoard::restartGame() {
+    isGameRestarted = true;
+    elapsedTime = 0;
+    blueberriesEaten = 0;
+    scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    bb->setPos(300, 200);
+    gameTimer->start(1000);
+    updateGame();
 }
 
 int GameBoard::getGameBoardWidth() const {
@@ -104,10 +168,6 @@ int GameBoard::getBlueberriesEaten() {
     return this->blueberriesEaten;
 }
 
-void GameBoard::increaseScore() {
-    this->score++;
-}
-
 void GameBoard::increaseBlueberriesEaten() {
     this->blueberriesEaten++;
 }
@@ -120,5 +180,46 @@ int GameBoard::getPauseButtonHeight() const {
     return this->pauseButtonHeight;
 }
 
+int GameBoard::getResumeButtonHeight() const {
+    return this->resumeButtonHeight;
+}
+
+int GameBoard::getResumeButtonWidth() const {
+    return this->resumeButtonWidth;
+}
+
+int GameBoard::getRestartButtonWidth() const {
+    return this->restartButtonWidth;
+}
+
+int GameBoard::getRestartButtonHeight() const {
+    return this->restartButtonHeight;
+}
+
+void GameBoard::startCollisionDetection() {
+    // TODO: FINISH ME
+}
+
+void GameBoard::updateGame() {
+    qDebug("GameBoard::updateGame() called Initially.");
+    elapsedTime++;
+    clockLabel->setText("Time: " + QString::number(elapsedTime));
+    bb->move();
+    //TODO: startCollisionDetection();
+    scene->update();
+    qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);
+}
+
+GameBoard::~GameBoard() {
+    delete bb;
+    delete scene;
+    delete gameTimer;
+    delete clockLabel;
+    delete playButton;
+    delete quitButton;
+    delete pauseButton;
+    delete resumeButton;
+    delete scoreLabel;
+}
 
 

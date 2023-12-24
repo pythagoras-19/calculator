@@ -5,6 +5,8 @@
 #ifndef CALCULATOR_GAMEBOARD_H
 #define CALCULATOR_GAMEBOARD_H
 
+#include "Blueberry.h"
+#include "Animal.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QLabel>
@@ -12,6 +14,8 @@
 #include <QGraphicsTextItem>
 #include <QPushButton>
 #include <QApplication>
+#include <QTimer>
+#include <QPixmap>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
@@ -27,18 +31,30 @@ public:
     int getQuitButtonHeight() const;
     int getPauseButtonWidth() const;
     int getPauseButtonHeight() const;
+    int getResumeButtonWidth() const;
+    int getResumeButtonHeight() const;
+    int getRestartButtonWidth() const;
+    int getRestartButtonHeight() const;
     int getBlueberriesEaten();
     void increaseScore();
     void increaseBlueberriesEaten();
+    void startCollisionDetection();
+    ~GameBoard() override;
 
 public slots:
-    static void startGame();
-    static void quitGame();
+    void startGame();
+    void quitGame();
+    void pauseGame();
+    void resumeGame();
+    void updateGame();
+    void restartGame();
+
 
 private:
     QGraphicsScene *scene;
     int blueberriesEaten;
-    int score;
+    int resumeButtonWidth;
+    int resumeButtonHeight;
     int pauseButtonWidth;
     int pauseButtonHeight;
     int playButtonWidth;
@@ -47,14 +63,24 @@ private:
     int gameBoardHeight;
     int quitButtonWidth;
     int quitButtonHeight;
+    int restartButtonWidth;
+    int restartButtonHeight;
     QLabel *scoreLabel;
-    QGraphicsPixmapItem *bearItem;
-    QGraphicsPixmapItem *blueberryItem;
     QPushButton *playButton;
     QPushButton *quitButton;
     QPushButton *pauseButton;
-    //TODO: pause button
-    //TODO: resume button
+    QPushButton *resumeButton;
+    QPushButton *restartButton;
+    QTimer *gameTimer;
+    QLabel *clockLabel;
+    int elapsedTime;
+    Blueberry *bb;
+    Animal *bear;
+    bool isGamePaused;
+    bool isGameStarted;
+    bool isGameQuit;
+    bool isGameResumed;
+    bool isGameRestarted;
 };
 
 
