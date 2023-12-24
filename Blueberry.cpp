@@ -13,11 +13,6 @@ Blueberry::Blueberry() {
 }
 
 QRectF Blueberry::boundingRect() const {
-    qDebug("------ Blueberry::boundingRect() called. ------");
-    qDebug("xPosition: %d", xPosition);
-    qDebug("yPosition: %d", yPosition);
-    qDebug("width: %d", width);
-    qDebug("height: %d", height);
     return QRectF(xPosition, yPosition, width, height);
 }
 
@@ -25,18 +20,11 @@ void Blueberry::randomizePosition() {
 
 }
 
-/*
-void Blueberry::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-   QPixmap blueberryPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg");
-   painter->drawPixmap(xPosition, yPosition, blueberryPixmap);
-}
- */
 void Blueberry::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     qDebug("------ Blueberry::paint() called. ------");
     QPixmap blueberryPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg");
     painter->drawPixmap(0, 0, blueberryPixmap.scaled(100, 100));
 }
-
 
 int Blueberry::getXPosition() const {
     return xPosition;
@@ -54,13 +42,8 @@ void Blueberry::setPosition(int xPosition, int yPosition) {
 void Blueberry::move() {
     qDebug("Blueberry::move() called.");
     xPosition += 10;
-    // qDebug("Made it after xPosition += 50");
     this->setPos(xPosition, yPosition);
-    qDebug("%s", "Blueberry::move() moved blueberry 10 spaces to the right.");
-    qDebug("xPosition: %d", xPosition);
-    qDebug("yPosition: %d", yPosition);
     update();
-    qDebug("Blueberry::move() updated() called.");
 }
 
 int Blueberry::getBlueberryHeight() const {

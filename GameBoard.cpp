@@ -13,7 +13,6 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     gameTimer = new QTimer(this);
     clockLabel = new QLabel(this);
     bb = new Blueberry();
-    //bear = new Animal();
     elapsedTime = 0;
 
     scene = new QGraphicsScene(this);
@@ -110,7 +109,6 @@ QGraphicsScene *GameBoard::getScene() const {
 }
 
 void GameBoard::startGame() {
-    // playButton->hide();
     gameTimer->start();
     isGameStarted = true;
     updateGame();

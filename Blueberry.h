@@ -22,7 +22,6 @@ public:
     int getBlueberryWidth() const;
     int getBlueberryHeight() const;
 
-    // override from QGraphicsItem
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
