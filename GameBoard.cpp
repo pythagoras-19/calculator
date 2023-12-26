@@ -12,7 +12,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     isGameRestarted = false;
     gameTimer = new QTimer(this);
     clockLabel = new QLabel(this);
-    bb = new Blueberry();
+    bbObj = new Blueberry();
     elapsedTime = 0;
 
     scene = new QGraphicsScene(this);
@@ -29,7 +29,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
     scene->addItem(bearPixmap);
 
-    scene->addItem(bb);
+    scene->addItem(bbObj);
 
     clockLabel->setText("Time: " + QString::number(elapsedTime));
     clockLabel->setGeometry(0, 20, 200, 20);
@@ -101,7 +101,7 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->scene->addWidget(resumeButton);
     this->scene->addWidget(restartButton);
 
-    gameTimer->setInterval(1000);
+    gameTimer->setInterval(100);
 }
 
 QGraphicsScene *GameBoard::getScene() const {
@@ -130,13 +130,15 @@ void GameBoard::resumeGame() {
 }
 
 void GameBoard::restartGame() {
+    delete bbObj;
+    bbObj = new Blueberry();
+    scene->addItem(bbObj);
     isGameRestarted = true;
     elapsedTime = 0;
     blueberriesEaten = 0;
     scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    bb->setPos(300, 200);
-    gameTimer->start(1000);
+    gameTimer->start();
     updateGame();
 }
 
@@ -202,16 +204,28 @@ void GameBoard::startCollisionDetection() {
 
 void GameBoard::updateGame() {
     qDebug("GameBoard::updateGame() called Initially.");
+    // Assuming you have a pointer 'scene' to your QGraphicsScene and 'blueberry' to your Blueberry object
+    QRectF sceneBounds = scene->sceneRect();
+    QSizeF blueberrySize = bbObj->boundingRect().size();
+
+// Calculate the maximum coordinates for the top-left corner of the blueberry
+    qreal maxX = sceneBounds.width() - blueberrySize.width();
+    qreal maxY = sceneBounds.height() - blueberrySize.height();
+    qDebug("GameBoard::updateGame() called. maxX: %f, maxY: %f", maxX, maxY);
+
+// Now maxX and maxY are the boundaries within which the blueberry can move
+
     elapsedTime++;
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    bb->move();
+    bbObj->move(this->gameBoardWidth-bbObj->getBlueberryWidth(),
+                this->gameBoardHeight-bbObj->getBlueberryHeight());
     //TODO: startCollisionDetection();
     scene->update();
     qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);
 }
 
 GameBoard::~GameBoard() {
-    delete bb;
+    delete bbObj;
     delete scene;
     delete gameTimer;
     delete clockLabel;

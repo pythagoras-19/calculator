@@ -16,4 +16,5 @@ This project uses Qt for the GUI.
   - when the user hits play the image of the bear does an animation
 - Movement for blueberry and bear
 # Bugs
-- Berry disappears prematurely
+- Berry disappears prematurely - however the berry can go to xpos = 700
+- Restart causes blueberry to reappearance in the last spot

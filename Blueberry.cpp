@@ -5,7 +5,7 @@
 #include "Blueberry.h"
 
 Blueberry::Blueberry() {
-    this->xPosition = 300;
+    this->xPosition = 0;
     this->yPosition = 200;
     this->width = 100;
     this->height = 100;
@@ -34,10 +34,20 @@ int Blueberry::getYPosition() const {
     return yPosition;
 }
 
-void Blueberry::move() {
+void Blueberry::move(int xBoundary, int yBoundary) {
     qDebug("Blueberry::move() called.");
-    xPosition += 10;
+    if (xPosition >= xBoundary) {
+        xPosition = 0;
+    }
+    if (yPosition >= yBoundary) {
+        yPosition = yBoundary;
+    }
+    int newXPosition = xPosition += 2;
+    if (newXPosition > xBoundary) {
+        newXPosition = xBoundary;
+    }
     this->setPos(xPosition, yPosition);
+    qDebug("New position: (%d, %d)", xPosition, yPosition);
     update();
 }
 

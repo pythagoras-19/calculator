@@ -74,7 +74,7 @@ private:
     QTimer *gameTimer;
     QLabel *clockLabel;
     int elapsedTime;
-    Blueberry *bb;
+    Blueberry *bbObj;
     Animal *bear;
     bool isGamePaused;
     bool isGameStarted;
