@@ -18,7 +18,7 @@ public:
     [[nodiscard]] int getXPosition() const;
     [[nodiscard]] int getYPosition() const;
     void setPosition(int xPosition, int yPosition);
-    void move();
+    void move(int xBoundary, int yBoundary);
     int getBlueberryWidth() const;
     int getBlueberryHeight() const;
 
