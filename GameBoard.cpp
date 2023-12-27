@@ -40,9 +40,9 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
     this->playButtonHeight = 50;
-    this->playButtonWidth = 200;
+    this->playButtonWidth = 100;
     this->quitButtonHeight = 50;
-    this->quitButtonWidth = 200;
+    this->quitButtonWidth = 100;
     this->pauseButtonHeight = 50;
     this->pauseButtonWidth = 100;
     this->resumeButtonHeight = 50;
@@ -126,7 +126,7 @@ void GameBoard::pauseGame() {
 
 void GameBoard::resumeGame() {
     isGamePaused = true;
-    gameTimer->start(1000);
+    gameTimer->start(100);
 }
 
 void GameBoard::restartGame() {
@@ -138,8 +138,6 @@ void GameBoard::restartGame() {
     blueberriesEaten = 0;
     scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    gameTimer->start();
-    updateGame();
 }
 
 int GameBoard::getGameBoardWidth() const {
@@ -204,21 +202,17 @@ void GameBoard::startCollisionDetection() {
 
 void GameBoard::updateGame() {
     qDebug("GameBoard::updateGame() called Initially.");
-    // Assuming you have a pointer 'scene' to your QGraphicsScene and 'blueberry' to your Blueberry object
     QRectF sceneBounds = scene->sceneRect();
     QSizeF blueberrySize = bbObj->boundingRect().size();
+    qDebug("Blueberry size: (%f, %f)", blueberrySize.width(), blueberrySize.height());
 
-// Calculate the maximum coordinates for the top-left corner of the blueberry
     qreal maxX = sceneBounds.width() - blueberrySize.width();
     qreal maxY = sceneBounds.height() - blueberrySize.height();
     qDebug("GameBoard::updateGame() called. maxX: %f, maxY: %f", maxX, maxY);
 
-// Now maxX and maxY are the boundaries within which the blueberry can move
-
     elapsedTime++;
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    bbObj->move(this->gameBoardWidth-bbObj->getBlueberryWidth(),
-                this->gameBoardHeight-bbObj->getBlueberryHeight());
+    bbObj->move(maxX, maxY);
     //TODO: startCollisionDetection();
     scene->update();
     qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);

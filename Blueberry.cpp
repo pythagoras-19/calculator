@@ -5,14 +5,19 @@
 #include "Blueberry.h"
 
 Blueberry::Blueberry() {
-    this->xPosition = 0;
-    this->yPosition = 200;
+    this->xPosition = 200;
+    this->yPosition = 300;
     this->width = 100;
     this->height = 100;
     this->setPos(xPosition, yPosition);
 }
 
 QRectF Blueberry::boundingRect() const {
+    qDebug("------ Blueberry::boundingRect() called. ------");
+    qDebug("xPosition: %d", xPosition);
+    qDebug("yPosition: %d", yPosition);
+    qDebug("width: %d", width);
+    qDebug("height: %d", height);
     return QRectF(xPosition, yPosition, width, height);
 }
 
@@ -24,6 +29,7 @@ void Blueberry::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     qDebug("------ Blueberry::paint() called. ------");
     QPixmap blueberryPixmap("/Users/mattc/CLionProjects/calculator/blueberry_cute_1.jpeg");
     painter->drawPixmap(0, 0, blueberryPixmap.scaled(100, 100));
+    qDebug("------ Blueberry::paint() finished. ------");
 }
 
 int Blueberry::getXPosition() const {
@@ -34,22 +40,20 @@ int Blueberry::getYPosition() const {
     return yPosition;
 }
 
-void Blueberry::move(int xBoundary, int yBoundary) {
+void Blueberry::move(qreal xBoundary, qreal yBoundary) {
     qDebug("Blueberry::move() called.");
-    if (xPosition >= xBoundary) {
+    xPosition += 1;
+    if (xPosition >= xBoundary - width) {
+        qDebug("Blueberry::move() called. xPosition >= xBoundary");
         xPosition = 0;
+        // TODO: Start bb at 0, 300
+        //return;
     }
-    if (yPosition >= yBoundary) {
-        yPosition = yBoundary;
-    }
-    int newXPosition = xPosition += 2;
-    if (newXPosition > xBoundary) {
-        newXPosition = xBoundary;
-    }
-    this->setPos(xPosition, yPosition);
     qDebug("New position: (%d, %d)", xPosition, yPosition);
+    this->setPos(xPosition, yPosition);
     update();
 }
+
 
 int Blueberry::getBlueberryHeight() const {
     return this->height;
