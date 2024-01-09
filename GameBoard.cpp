@@ -24,18 +24,12 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     scene->addItem(meadowPixmap);
 
     auto *bW = new BearWidget();
-    bW->setBearPixmap(QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png").scaled(100, 100));
+    bW->setBearPixmap(QPixmap(
+            "/Users/mattc/CLionProjects/calculator/bear_cute.png").scaled(100, 100));
     QGraphicsProxyWidget *proxy = scene->addWidget(bW);
     proxy->setPos(100, 100);
     proxy->setFlag(QGraphicsItem::ItemIsMovable);
     scene->addWidget(bW);
-    /*
-    auto *bearPixmap = new QGraphicsPixmapItem(
-            QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
-    bearPixmap->setPos(100, 100);
-    bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
-    scene->addItem(bearPixmap);
-     */
 
     scene->addItem(bbObj);
 

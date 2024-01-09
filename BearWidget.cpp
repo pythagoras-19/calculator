@@ -6,6 +6,9 @@
 
 BearWidget::BearWidget(QWidget *parent) : QWidget(parent), dragging(false) {
     bearPixmap = QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png");
+    setAttribute(Qt::WA_TranslucentBackground);
+    setStyleSheet("background:transparent;");
+    setFixedSize(bearPixmap.size());
 }
 
 void BearWidget::mousePressEvent(QMouseEvent *event) {
