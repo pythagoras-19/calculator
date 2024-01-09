@@ -29,12 +29,13 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     proxy->setPos(100, 100);
     proxy->setFlag(QGraphicsItem::ItemIsMovable);
     scene->addWidget(bW);
-
+    /*
     auto *bearPixmap = new QGraphicsPixmapItem(
             QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
     bearPixmap->setPos(100, 100);
     bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
     scene->addItem(bearPixmap);
+     */
 
     scene->addItem(bbObj);
 
