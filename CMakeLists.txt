@@ -33,6 +33,8 @@ add_executable(
         GameBoard.h
         Blueberry.cpp
         Blueberry.h
+        BearWidget.cpp
+        BearWidget.h
 )
 
 # link the Qt6 libraries and MongoDB driver libraries
