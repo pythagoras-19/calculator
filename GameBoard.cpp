@@ -26,10 +26,13 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     auto *bW = new BearWidget();
     bW->setBearPixmap(QPixmap(
             "/Users/mattc/CLionProjects/calculator/bear_cute.png").scaled(100, 100));
-    QGraphicsProxyWidget *proxy = scene->addWidget(bW);
-    proxy->setPos(100, 100);
-    proxy->setFlag(QGraphicsItem::ItemIsMovable);
-    scene->addWidget(bW);
+    QGraphicsProxyWidget *proxy_1 = scene->addWidget(bW);
+    if (proxy_1) {
+        proxy_1->setPos(100, 100);
+        proxy_1->setFlag(QGraphicsItem::ItemIsMovable);
+    } else {
+        qDebug() << "-- proxy_1 is null --";
+    }
 
     scene->addItem(bbObj);
 
@@ -199,7 +202,19 @@ int GameBoard::getRestartButtonHeight() const {
 }
 
 void GameBoard::startCollisionDetection() {
-    // TODO: FINISH ME
+    qDebug("GameBoard::startCollisionDetection() called.");
+    if (this->proxy && this->proxy->collidesWithItem(bbObj)) {
+        increaseBlueberriesEaten();
+        //TODO: bbObj->setRandomPosition();
+    } else {
+        if (!this->proxy) {
+            qDebug("GameBoard::startCollisionDetection() called. proxy is null.");
+        }
+        if (!bbObj) {
+            qDebug("GameBoard::startCollisionDetection() called. bbObj is null.");
+        }
+        qDebug("GameBoard::startCollisionDetection() called. No collision detected.");
+    }
 }
 
 void GameBoard::updateGame() {
@@ -215,7 +230,8 @@ void GameBoard::updateGame() {
     elapsedTime++;
     clockLabel->setText("Time: " + QString::number(elapsedTime));
     bbObj->move(maxX, maxY);
-    //TODO: startCollisionDetection();
+    startCollisionDetection();
+    scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
     scene->update();
     qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);
 }

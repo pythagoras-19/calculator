@@ -78,7 +78,8 @@ private:
     int elapsedTime;
     Blueberry *bbObj;
     Animal *bear;
-    BearWidget *bearWidget;
+    BearWidget *bW;
+    QGraphicsProxyWidget *proxy;
     bool isGamePaused;
     bool isGameStarted;
     bool isGameQuit;
