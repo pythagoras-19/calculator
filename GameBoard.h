@@ -7,6 +7,7 @@
 
 #include "Blueberry.h"
 #include "Animal.h"
+#include "BearWidget.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QLabel>
@@ -16,6 +17,7 @@
 #include <QApplication>
 #include <QTimer>
 #include <QPixmap>
+#include <QGraphicsProxyWidget>
 
 class GameBoard : public QGraphicsView {
     Q_OBJECT
@@ -76,6 +78,8 @@ private:
     int elapsedTime;
     Blueberry *bbObj;
     Animal *bear;
+    BearWidget *bW;
+    QGraphicsProxyWidget *proxy;
     bool isGamePaused;
     bool isGameStarted;
     bool isGameQuit;

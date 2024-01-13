@@ -15,10 +15,10 @@ class Blueberry : public QGraphicsItem {
 public:
     Blueberry();
     void randomizePosition();
-    [[nodiscard]] int getXPosition() const;
-    [[nodiscard]] int getYPosition() const;
+    int getXPosition() const;
+    int getYPosition() const;
     void setPosition(int xPosition, int yPosition);
-    void move(int xBoundary, int yBoundary);
+    void move(qreal xBoundary, qreal yBoundary);
     int getBlueberryWidth() const;
     int getBlueberryHeight() const;
 

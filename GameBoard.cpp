@@ -23,11 +23,16 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
             QPixmap("/Users/mattc/CLionProjects/calculator/meadow_cute.jpeg"));
     scene->addItem(meadowPixmap);
 
-    auto *bearPixmap = new QGraphicsPixmapItem(
-            QPixmap("/Users/mattc/CLionProjects/calculator/bear_cute.png"));
-    bearPixmap->setPos(100, 100);
-    bearPixmap->setPixmap(bearPixmap->pixmap().scaled(100, 100));
-    scene->addItem(bearPixmap);
+    auto *bW = new BearWidget();
+    bW->setBearPixmap(QPixmap(
+            "/Users/mattc/CLionProjects/calculator/bear_cute.png").scaled(100, 100));
+    QGraphicsProxyWidget *proxy_1 = scene->addWidget(bW);
+    if (proxy_1) {
+        proxy_1->setPos(100, 100);
+        proxy_1->setFlag(QGraphicsItem::ItemIsMovable);
+    } else {
+        qDebug() << "-- proxy_1 is null --";
+    }
 
     scene->addItem(bbObj);
 
@@ -40,9 +45,9 @@ GameBoard::GameBoard(QWidget *parent) : QGraphicsView(parent) {
     this->gameBoardWidth = 800;
     this->gameBoardHeight = 600;
     this->playButtonHeight = 50;
-    this->playButtonWidth = 200;
+    this->playButtonWidth = 100;
     this->quitButtonHeight = 50;
-    this->quitButtonWidth = 200;
+    this->quitButtonWidth = 100;
     this->pauseButtonHeight = 50;
     this->pauseButtonWidth = 100;
     this->resumeButtonHeight = 50;
@@ -126,7 +131,7 @@ void GameBoard::pauseGame() {
 
 void GameBoard::resumeGame() {
     isGamePaused = true;
-    gameTimer->start(1000);
+    gameTimer->start(100);
 }
 
 void GameBoard::restartGame() {
@@ -138,8 +143,6 @@ void GameBoard::restartGame() {
     blueberriesEaten = 0;
     scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    gameTimer->start();
-    updateGame();
 }
 
 int GameBoard::getGameBoardWidth() const {
@@ -199,27 +202,36 @@ int GameBoard::getRestartButtonHeight() const {
 }
 
 void GameBoard::startCollisionDetection() {
-    // TODO: FINISH ME
+    qDebug("GameBoard::startCollisionDetection() called.");
+    if (this->proxy && this->proxy->collidesWithItem(bbObj)) {
+        increaseBlueberriesEaten();
+        //TODO: bbObj->setRandomPosition();
+    } else {
+        if (!this->proxy) {
+            qDebug("GameBoard::startCollisionDetection() called. proxy is null.");
+        }
+        if (!bbObj) {
+            qDebug("GameBoard::startCollisionDetection() called. bbObj is null.");
+        }
+        qDebug("GameBoard::startCollisionDetection() called. No collision detected.");
+    }
 }
 
 void GameBoard::updateGame() {
     qDebug("GameBoard::updateGame() called Initially.");
-    // Assuming you have a pointer 'scene' to your QGraphicsScene and 'blueberry' to your Blueberry object
     QRectF sceneBounds = scene->sceneRect();
     QSizeF blueberrySize = bbObj->boundingRect().size();
+    qDebug("Blueberry size: (%f, %f)", blueberrySize.width(), blueberrySize.height());
 
-// Calculate the maximum coordinates for the top-left corner of the blueberry
     qreal maxX = sceneBounds.width() - blueberrySize.width();
     qreal maxY = sceneBounds.height() - blueberrySize.height();
     qDebug("GameBoard::updateGame() called. maxX: %f, maxY: %f", maxX, maxY);
 
-// Now maxX and maxY are the boundaries within which the blueberry can move
-
     elapsedTime++;
     clockLabel->setText("Time: " + QString::number(elapsedTime));
-    bbObj->move(this->gameBoardWidth-bbObj->getBlueberryWidth(),
-                this->gameBoardHeight-bbObj->getBlueberryHeight());
-    //TODO: startCollisionDetection();
+    bbObj->move(maxX, maxY);
+    startCollisionDetection();
+    scoreLabel->setText("Blueberries Eaten: " + QString::number(this->blueberriesEaten));
     scene->update();
     qDebug("GameBoard::updateGame() called. Iteration: %d", elapsedTime);
 }

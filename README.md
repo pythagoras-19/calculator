@@ -17,4 +17,3 @@ This project uses Qt for the GUI.
 - Movement for blueberry and bear
 # Bugs
 - Berry disappears prematurely - however the berry can go to xpos = 700
-- Restart causes blueberry to reappearance in the last spot
